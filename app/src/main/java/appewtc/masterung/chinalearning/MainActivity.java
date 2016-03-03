@@ -168,23 +168,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String[] chooseStrings = {"Easy", "Medium", "Hard"};
         String userChoose = null;
+        int intIndex = 0;
 
         switch (view.getId()) {
 
             case R.id.button:
                 userChoose = chooseStrings[0];
+                intIndex = 0;
                 break;
             case R.id.button2:
                 userChoose = chooseStrings[1];
+                intIndex = 1;
                 break;
             case R.id.button3:
                 userChoose = chooseStrings[2];
+                intIndex = 2;
                 break;
 
         }   // switch
 
         Intent intent = new Intent(MainActivity.this, Hub12Unit.class);
         intent.putExtra("userChoose", userChoose);
+        intent.putExtra("index", intIndex);
         startActivity(intent);
 
 
