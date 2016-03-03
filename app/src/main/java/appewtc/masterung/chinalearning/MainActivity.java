@@ -1,10 +1,13 @@
 package appewtc.masterung.chinalearning;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,15 +21,20 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Explicit
     private MyManage myManage;
+    public String[] unitStrings;
+    private Button easyButton, mediumButton, hardButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Bind Widget
+        bindWidget();
 
         //Request Database
         myManage = new MyManage(this);
@@ -40,7 +48,22 @@ public class MainActivity extends AppCompatActivity {
         //Synchronize JSON to SQLite
         synJSONtoSQLite();
 
+        //Button Controller
+        buttonController();
+
     }   // Main Method
+
+    private void bindWidget() {
+        easyButton = (Button) findViewById(R.id.button);
+        mediumButton = (Button) findViewById(R.id.button2);
+        hardButton = (Button) findViewById(R.id.button3);
+    }
+
+    private void buttonController() {
+        easyButton.setOnClickListener(this);
+        mediumButton.setOnClickListener(this);
+        hardButton.setOnClickListener(this);
+    }
 
     private void synJSONtoSQLite() {
 
@@ -61,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             tableStrings[3] = "http://swiftcodingthai.com/see/php_get_unit4.php";
             tableStrings[4] = "http://swiftcodingthai.com/see/php_get_unit5.php";
 
-            String[] unitStrings = new String[5];
+            unitStrings = new String[5];
             unitStrings[0] = "บทที่ 1";
             unitStrings[1] = "บทที่ 2";
             unitStrings[2] = "บทที่ 3";
@@ -139,5 +162,32 @@ public class MainActivity extends AppCompatActivity {
     private void testAddValue() {
         myManage.addLearn("testUnit", "ง่าย", "urlImage", "Vol", "read", "meaning", "urlSound");
     }
+
+    @Override
+    public void onClick(View view) {
+
+        String[] chooseStrings = {"Easy", "Medium", "Hard"};
+        String userChoose = null;
+
+        switch (view.getId()) {
+
+            case R.id.button:
+                userChoose = chooseStrings[0];
+                break;
+            case R.id.button2:
+                userChoose = chooseStrings[1];
+                break;
+            case R.id.button3:
+                userChoose = chooseStrings[2];
+                break;
+
+        }   // switch
+
+        Intent intent = new Intent(MainActivity.this, Hub12Unit.class);
+        intent.putExtra("userChoose", userChoose);
+        startActivity(intent);
+
+
+    }   // onClick
 
 }   // Main Class
