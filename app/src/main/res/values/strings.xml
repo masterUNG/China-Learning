@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">China Learning</string>
+
+    <string name="title_main">แอพพลิเคชันสอนจีนกลาง</string>
+    <string name="easy">ง่าย</string>
+    <string name="medium">ปานกลาง</string>
+    <string name="hard">ยาก</string>
+
 </resources>
