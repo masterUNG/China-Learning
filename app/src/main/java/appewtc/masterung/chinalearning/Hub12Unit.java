@@ -25,7 +25,19 @@ public class Hub12Unit extends AppCompatActivity {
         //Show View
         showView();
 
+        //Create ListView
+        createListView();
+
     }   // Main Method
+
+    private void createListView() {
+
+        String[] titleStrings = {"บทที่ 1", "บทที่ 2"};
+
+        MyAdapter myAdapter = new MyAdapter(Hub12Unit.this, titleStrings);
+        unit12ListView.setAdapter(myAdapter);
+
+    }   // createListView
 
     private void showView() {
         userChooseString = getIntent().getStringExtra("userChoose");
