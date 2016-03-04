@@ -1,5 +1,7 @@
 package appewtc.masterung.chinalearning;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -7,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class TestHubActivity extends AppCompatActivity {
 
@@ -19,6 +23,8 @@ public class TestHubActivity extends AppCompatActivity {
             choice3RadioButton, choice4RadioButton;
     private Button answerButton;
     private String unitString;
+    private String[] questionStrings, imageStrings, soundStrings,
+            choice1Strings, choice2Strings, choice3Strings, choice4Strings, answerStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,53 @@ public class TestHubActivity extends AppCompatActivity {
         unitString = getIntent().getStringExtra("Unit");
         titleTextView.setText("แบบทดสอบ " + unitString);
 
+        SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
+                MODE_PRIVATE, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM testTABLE WHERE Unit = " + "'" + unitString + "'", null);
+        cursor.moveToFirst();
+        int intCount = cursor.getCount();
+
+        questionStrings = new String[intCount];
+        imageStrings = new String[intCount];
+        soundStrings = new String[intCount];
+        choice1Strings = new String[intCount];
+        choice2Strings = new String[intCount];
+        choice3Strings = new String[intCount];
+        choice4Strings = new String[intCount];
+        answerStrings = new String[intCount];
+
+        for (int i = 0; i < intCount; i++) {
+
+            questionStrings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Question));
+            imageStrings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Image));
+            soundStrings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Sound));
+            choice1Strings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Choice1));
+            choice2Strings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Choice2));
+            choice3Strings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Choice3));
+            choice4Strings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Choice4));
+            answerStrings[i] = cursor.getString(cursor.getColumnIndex(MyManage.column_Answer));
+
+            cursor.moveToNext();
+        }   //for
+        cursor.close();
+
+        changeView(0);
+
     }   // showView
+
+    private void changeView(int index) {
+
+        questionTextView.setText(questionStrings[index]);
+        choice1RadioButton.setText(choice1Strings[index]);
+        choice2RadioButton.setText(choice2Strings[index]);
+        choice3RadioButton.setText(choice3Strings[index]);
+        choice4RadioButton.setText(choice4Strings[index]);
+
+        Picasso.with(TestHubActivity.this)
+                .load(imageStrings[index]).resize(180, 180).into(questionImageView);
+
+
+    }   // changeView
 
     private void bindWidget() {
 
