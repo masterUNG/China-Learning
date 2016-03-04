@@ -73,16 +73,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StrictMode.setThreadPolicy(threadPolicy);
 
         int intUnit = 0;
-        while (intUnit <= 4) {
+        while (intUnit <= 5) {
 
             //1. Create InputStream
             InputStream inputStream = null;
-            String[] tableStrings = new String[5];
+            String[] tableStrings = new String[6];
             tableStrings[0] = "http://swiftcodingthai.com/see/php_get_unit1.php";
             tableStrings[1] = "http://swiftcodingthai.com/see/php_get_unit2.php";
             tableStrings[2] = "http://swiftcodingthai.com/see/php_get_unit3.php";
             tableStrings[3] = "http://swiftcodingthai.com/see/php_get_unit4.php";
             tableStrings[4] = "http://swiftcodingthai.com/see/php_get_unit5.php";
+            tableStrings[5] = "http://swiftcodingthai.com/see/php_get_test.php";
 
             unitStrings = new String[5];
             unitStrings[0] = "บทที่ 1";
@@ -130,16 +131,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 for (int i=0;i<jsonArray.length();i++) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String strUnit = unitStrings[intUnit];
-                    String strlevel = jsonObject.getString(MyManage.column_Level);
-                    String strImage = jsonObject.getString(MyManage.column_Image);
-                    String strVocap = jsonObject.getString(MyManage.column_Vocabulary);
-                    String strRead = jsonObject.getString(MyManage.column_Read);
-                    String strMeaning = jsonObject.getString(MyManage.column_Meaning);
-                    String strSound = jsonObject.getString(MyManage.column_Sound);
 
-                    myManage.addLearn(strUnit, strlevel, strImage, strVocap, strRead,
-                            strMeaning, strSound);
+                    if (intUnit == 5) {
+
+                        String strUnit = jsonObject.getString(MyManage.column_Unit);
+                        String strQuestion = jsonObject.getString(MyManage.column_Question);
+                        String strImage = jsonObject.getString(MyManage.column_Image);
+                        String strSound = jsonObject.getString(MyManage.column_Sound);
+                        String strChoice1 = jsonObject.getString(MyManage.column_Choice1);
+                        String strChoice2 = jsonObject.getString(MyManage.column_Choice2);
+                        String strChoice3 = jsonObject.getString(MyManage.column_Choice3);
+                        String strChoice4 = jsonObject.getString(MyManage.column_Choice4);
+                        String strAnser = jsonObject.getString(MyManage.column_Answer);
+
+                        myManage.addTest(strUnit, strQuestion, strImage, strSound,
+                                strChoice1, strChoice2, strChoice3, strChoice4, strAnser);
+
+                    } else {
+
+                        String strUnit = unitStrings[intUnit];
+                        String strlevel = jsonObject.getString(MyManage.column_Level);
+                        String strImage = jsonObject.getString(MyManage.column_Image);
+                        String strVocap = jsonObject.getString(MyManage.column_Vocabulary);
+                        String strRead = jsonObject.getString(MyManage.column_Read);
+                        String strMeaning = jsonObject.getString(MyManage.column_Meaning);
+                        String strSound = jsonObject.getString(MyManage.column_Sound);
+
+                        myManage.addLearn(strUnit, strlevel, strImage, strVocap, strRead,
+                                strMeaning, strSound);
+
+                    }   // if
 
                 }   // for
 
@@ -157,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
                 MODE_PRIVATE, null);
         sqLiteDatabase.delete(MyManage.learn_table, null, null);
+        sqLiteDatabase.delete(MyManage.test_table, null, null);
     }
 
     private void testAddValue() {

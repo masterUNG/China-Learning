@@ -44,7 +44,41 @@ public class MyManage {
 
     }   // Constructor
 
+    public long addUser(String strDate,
+                        String strUnit,
+                        String strScore) {
 
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_Date, strDate);
+        contentValues.put(column_Unit, strUnit);
+        contentValues.put(column_Score, strScore);
+
+        return writeSqLiteDatabase.insert(user_table, null, contentValues);
+    }
+
+    public long addTest(String strUnit,
+                        String strQuestion,
+                        String strImage,
+                        String strSound,
+                        String strChoice1,
+                        String strChoice2,
+                        String strChoice3,
+                        String strChoice4,
+                        String strAnswer) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_Unit, strUnit);
+        contentValues.put(column_Question, strQuestion);
+        contentValues.put(column_Image, strImage);
+        contentValues.put(column_Sound, strSound);
+        contentValues.put(column_Choice1, strChoice1);
+        contentValues.put(column_Choice2, strChoice2);
+        contentValues.put(column_Choice3, strChoice3);
+        contentValues.put(column_Choice4, strChoice4);
+        contentValues.put(column_Answer, strAnswer);
+
+        return writeSqLiteDatabase.insert(test_table, null, contentValues);
+    }
 
     public long addLearn(String strUnit,
                          String strLevel,
