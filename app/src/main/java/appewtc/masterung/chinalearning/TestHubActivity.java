@@ -115,7 +115,25 @@ public class TestHubActivity extends AppCompatActivity {
 
     private void showAnswerTrue(int position) {
 
-       // choice1ImageView.setImageResource(R.drawable.);
+        choice1ImageView.setImageResource(R.drawable.myfalse);
+        choice2ImageView.setImageResource(R.drawable.myfalse);
+        choice3ImageView.setImageResource(R.drawable.myfalse);
+        choice4ImageView.setImageResource(R.drawable.myfalse);
+
+        switch (position) {
+            case 1:
+                choice1ImageView.setImageResource(R.drawable.mytrue);
+                break;
+            case 2:
+                choice2ImageView.setImageResource(R.drawable.mytrue);
+                break;
+            case 3:
+                choice3ImageView.setImageResource(R.drawable.mytrue);
+                break;
+            case 4:
+                choice4ImageView.setImageResource(R.drawable.mytrue);
+                break;
+        }   //switch
 
     }   // showAnswerTrue
 
