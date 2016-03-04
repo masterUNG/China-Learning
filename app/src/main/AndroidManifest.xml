@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Hub12Unit" />
-        <activity android:name=".HubAllUnit"></activity>
+        <activity android:name=".HubAllUnit" />
+        <activity android:name=".UnitListView"></activity>
     </application>
 
 </manifest>

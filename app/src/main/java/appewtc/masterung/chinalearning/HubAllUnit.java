@@ -1,7 +1,10 @@
 package appewtc.masterung.chinalearning;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,10 +34,21 @@ public class HubAllUnit extends AppCompatActivity {
     }   // Main Method
 
     private void createListView() {
-        String[] titleStrings = {"บทที่ 1", "บทที่ 2", "บทที่ 3", "บทที่ 4", "บทที่ 5"};
+        final String[] titleStrings = {"บทที่ 1", "บทที่ 2", "บทที่ 3", "บทที่ 4", "บทที่ 5"};
 
         MyAdapter myAdapter = new MyAdapter(HubAllUnit.this, titleStrings);
         unitListView.setAdapter(myAdapter);
+
+        unitListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(HubAllUnit.this, UnitListView.class);
+                intent.putExtra("unit", titleStrings[i]);
+                intent.putExtra("userChoose", userChooseString);
+                intent.putExtra("index", indexAnInt);
+                startActivity(intent);
+            }
+        });
 
 
     }   // createListView

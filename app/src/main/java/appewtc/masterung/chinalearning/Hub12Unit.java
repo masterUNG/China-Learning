@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -52,10 +53,21 @@ public class Hub12Unit extends AppCompatActivity {
 
     private void createListView() {
 
-        String[] titleStrings = {"บทที่ 1", "บทที่ 2"};
+        final String[] titleStrings = {"บทที่ 1", "บทที่ 2"};
 
         MyAdapter myAdapter = new MyAdapter(Hub12Unit.this, titleStrings);
         unit12ListView.setAdapter(myAdapter);
+
+        unit12ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(Hub12Unit.this, UnitListView.class);
+                intent.putExtra("unit", titleStrings[i]);
+                intent.putExtra("userChoose", userChooseString);
+                intent.putExtra("index", intIndex);
+                startActivity(intent);
+            }
+        });
 
     }   // createListView
 
