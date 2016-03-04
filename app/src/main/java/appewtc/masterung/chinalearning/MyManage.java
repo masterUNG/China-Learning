@@ -22,6 +22,19 @@ public class MyManage {
     public static final String column_Meaning = "Meaning";
     public static final String column_Sound = "Sound";
 
+    public static final String test_table = "testTABLE";
+    public static final String column_Question = "Question";
+    public static final String column_Choice1 = "Choice1";
+    public static final String column_Choice2 = "Choice2";
+    public static final String column_Choice3 = "Choice3";
+    public static final String column_Choice4 = "Choice4";
+    public static final String column_Answer = "Answer";
+
+    public static final String user_table = "userTABLE";
+    public static final String column_Date = "Date";
+    public static final String column_Score = "Score";
+
+
     public MyManage(Context context) {
 
         //Create & Connected
@@ -30,6 +43,8 @@ public class MyManage {
         readSqLiteDatabase = myOpenHelper.getReadableDatabase();
 
     }   // Constructor
+
+
 
     public long addLearn(String strUnit,
                          String strLevel,
