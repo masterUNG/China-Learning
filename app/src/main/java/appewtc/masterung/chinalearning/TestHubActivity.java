@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -115,6 +116,11 @@ public class TestHubActivity extends AppCompatActivity {
 
     private void showAnswerTrue(int position) {
 
+        choice1ImageView.setVisibility(View.VISIBLE);
+        choice2ImageView.setVisibility(View.VISIBLE);
+        choice3ImageView.setVisibility(View.VISIBLE);
+        choice4ImageView.setVisibility(View.VISIBLE);
+
         choice1ImageView.setImageResource(R.drawable.myfalse);
         choice2ImageView.setImageResource(R.drawable.myfalse);
         choice3ImageView.setImageResource(R.drawable.myfalse);
@@ -134,6 +140,17 @@ public class TestHubActivity extends AppCompatActivity {
                 choice4ImageView.setImageResource(R.drawable.mytrue);
                 break;
         }   //switch
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                choice1ImageView.setVisibility(View.INVISIBLE);
+                choice2ImageView.setVisibility(View.INVISIBLE);
+                choice3ImageView.setVisibility(View.INVISIBLE);
+                choice4ImageView.setVisibility(View.INVISIBLE);
+            }
+        }, 3000);
 
     }   // showAnswerTrue
 
