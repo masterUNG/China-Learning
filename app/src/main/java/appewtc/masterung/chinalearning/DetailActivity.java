@@ -1,7 +1,10 @@
 package appewtc.masterung.chinalearning;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +29,39 @@ public class DetailActivity extends AppCompatActivity {
         //Show View
         showView();
 
+        //Play Sound
+        playSound();
+
     }   // Main Method
+
+    private void playSound() {
+
+        speackerImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                speackChina();
+
+            } // event
+        });
+
+    }   // playSound
+
+    private void speackChina() {
+
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+
+            mediaPlayer.setDataSource(soundURLString);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }   //speackChina
 
     private void showView() {
 
