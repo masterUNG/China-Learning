@@ -9,5 +9,7 @@
 
     <string name="test">แบบทดสอบ</string>
     <string name="answer"> ตอบคำถาม</string>
+    <string name="start">เริ่มใหม่</string>
+    <string name="learn">บทเรียน</string>
 
 </resources>
