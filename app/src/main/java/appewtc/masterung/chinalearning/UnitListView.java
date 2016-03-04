@@ -34,8 +34,24 @@ public class UnitListView extends AppCompatActivity {
         //Create ListView
         createListView();
 
+        //Button Controller
+        buttonController();
+
 
     }   // Main Method
+
+    private void buttonController() {
+
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UnitListView.this, TestHubActivity.class);
+                intent.putExtra("Unit", unitString);
+                startActivity(intent);
+            }
+        });
+
+    }
 
     private void createListView() {
 
