@@ -21,7 +21,8 @@
         <activity android:name=".HubAllUnit" />
         <activity android:name=".UnitListView" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".TestHubActivity"></activity>
+        <activity android:name=".TestHubActivity" />
+        <activity android:name=".ScoreActivity"></activity>
     </application>
 
 </manifest>
