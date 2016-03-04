@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".Hub12Unit" />
         <activity android:name=".HubAllUnit" />
-        <activity android:name=".UnitListView"></activity>
+        <activity android:name=".UnitListView" />
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>
