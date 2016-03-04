@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,7 +29,7 @@ public class TestHubActivity extends AppCompatActivity {
     private String unitString;
     private String[] questionStrings, imageStrings, soundStrings,
             choice1Strings, choice2Strings, choice3Strings, choice4Strings, answerStrings;
-    private int timesAnInt = 0, userChooseAnInt = 0;
+    private int timesAnInt = 0, userChooseAnInt = 0, scoreAnInt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,8 @@ public class TestHubActivity extends AppCompatActivity {
                     Toast.makeText(TestHubActivity.this, "กรุณาเลือก Choice", Toast.LENGTH_SHORT).show();
                 } else {
 
+                    checkScore();
+
                     checkTimes();
 
                 }   // if
@@ -96,6 +99,17 @@ public class TestHubActivity extends AppCompatActivity {
         });
 
     }   // buttonController
+
+    private void checkScore() {
+
+        if (userChooseAnInt == Integer.parseInt(answerStrings[timesAnInt])) {
+            scoreAnInt += 1;
+            Log.d("score", "Score = " + scoreAnInt);
+        }
+
+        choiceRadioGroup.clearCheck();
+
+    }   // checkScore
 
     private void checkTimes() {
 
