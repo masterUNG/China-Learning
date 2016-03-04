@@ -7,5 +7,6 @@
     <dimen name="h2">20sp</dimen>
     <dimen name="icon">80dp</dimen>
     <dimen name="image">200dp</dimen>
+    <dimen name="icon20">30dp</dimen>
 
 </resources>
