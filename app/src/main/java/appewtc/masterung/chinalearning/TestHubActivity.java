@@ -51,6 +51,11 @@ public class TestHubActivity extends AppCompatActivity {
 
     } // Main Method
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     private void radioController() {
 
         choiceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
